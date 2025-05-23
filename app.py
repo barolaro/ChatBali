@@ -1,31 +1,17 @@
 import streamlit as st
 import requests
-import base64
-import os
 
 # --- Título principal ---
 st.markdown("<h1 style='text-align: center;'>🤖 ChatBali: Consulta tu Contrato Hospital Concesionario</h1>", unsafe_allow_html=True)
 
-# --- Visualización del PDF ---
-st.markdown("### 📄 Documento")
+# --- Botón para descargar el PDF ---
+st.markdown("### 📄 Descarga del documento")
 
 pdf_path = "contrato.pdf"
-
-if os.path.exists(pdf_path):
+try:
     with open(pdf_path, "rb") as f:
-        base64_pdf = base64.b64encode(f.read()).decode("utf-8")
-        pdf_display = f"""
-            <object data="data:application/pdf;base64,{base64_pdf}" type="application/pdf" width="100%" height="600px">
-                <p>Tu navegador no puede mostrar el PDF. Puedes 
-                <a href="data:application/pdf;base64,{base64_pdf}" download="contrato.pdf">descargar el archivo aquí</a>.</p>
-            </object>
-        """
-        st.markdown(pdf_display, unsafe_allow_html=True)
-
-        # Botón de descarga
-        f.seek(0)
-        st.download_button("📥 Descargar PDF", f, file_name="contrato.pdf", mime="application/pdf")
-else:
+        st.download_button("📥 Descargar contrato.pdf", f, file_name="contrato.pdf", mime="application/pdf")
+except FileNotFoundError:
     st.warning("⚠️ El archivo contrato.pdf no se encontró. Asegúrate de que esté en la raíz del proyecto.")
 
 # --- Chat con ChatPDF ---
@@ -57,3 +43,4 @@ if user_input:
             st.markdown(result["content"])
         else:
             st.error("❌ Error en la API. Verifica tu clave o sourceId.")
+
