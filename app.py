@@ -9,7 +9,6 @@ st.markdown("<h1 style='text-align: center;'>🤖 ChatBali: Consulta tu Contrato
 st.markdown("### 📄 Documento")
 
 pdf_path = "contrato.pdf"
-"
 
 # Mostrar PDF incrustado si existe
 try:
@@ -28,7 +27,7 @@ except FileNotFoundError:
 st.markdown("### 💬 Haz tu pregunta")
 
 API_KEY = st.secrets["CHATPDF_API_KEY"]
-SOURCE_ID = "cha_G85wPwqQ0gYG0SodoZPlh"  # Tu sourceId de ChatPDF
+SOURCE_ID = "cha_G85wPwqQ0gYG0SodoZPlh"  # Reemplaza con tu ID si cambia
 
 user_input = st.chat_input("Escribe tu duda sobre el contrato...")
 
@@ -53,5 +52,4 @@ if user_input:
             st.markdown(result["content"])
         else:
             st.error("❌ Error en la API. Verifica tu clave o sourceId.")
-
 
