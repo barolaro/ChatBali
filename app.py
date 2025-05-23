@@ -8,7 +8,8 @@ st.markdown("<h1 style='text-align: center;'>🤖 ChatBali: Consulta tu Contrato
 # --- Visualización del PDF ---
 st.markdown("### 📄 Documento")
 
-pdf_path = "BasesTipoEstdeSalud_Ref_Enero2020.pdf"
+pdf_path = "contrato.pdf"
+"
 
 # Mostrar PDF incrustado si existe
 try:
