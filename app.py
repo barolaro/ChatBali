@@ -1,8 +1,8 @@
 import streamlit as st
 import requests
 
-# --- Título principal ---
-st.markdown("<h1 style='text-align: center;'>🤖 ChatBali: Consulta tu Contrato Hospital Concesionario</h1>", unsafe_allow_html=True)
+# --- Título principal personalizado ---
+st.markdown("<h1 style='text-align: center;'>🤖 ChatBali: Explora las Bases de Licitación de tu Contrato Hospitalario</h1>", unsafe_allow_html=True)
 
 # --- Botón para descargar el PDF ---
 st.markdown("### 📄 Descarga del documento")
@@ -17,9 +17,24 @@ except FileNotFoundError:
 # --- Chat con ChatPDF ---
 st.markdown("### 💬 Haz tu pregunta")
 
-API_KEY = st.secrets["CHATPDF_API_KEY"]
-SOURCE_ID = "cha_G85wPwqQ0gYG0SodoZPlh"  # Tu ID de ChatPDF
+# Mensaje inicial sugerido
+st.markdown("""
+<div style='background-color: #f0f2f6; padding: 15px; border-radius: 10px; margin-bottom: 20px;'>
+<b>💬 Bienvenida:</b><br>
+¡Bienvenido al PDF de Bases de Licitación para Concesiones de Establecimientos de Salud!<br><br>
+En este documento encontrarás toda la información necesaria para presentar una oferta exitosa y llevar a cabo la construcción y operación de un establecimiento de salud.<br><br>
+<b>Ejemplos de preguntas que puedes hacer:</b><br>
+• ¿Cuáles son los requisitos mínimos que se deben cumplir en el Proyecto Definitivo?<br>
+• ¿Qué tipo de mobiliario y equipamiento debe proveer e instalar el Concesionario?<br>
+• ¿Cuál es el plazo establecido para presentar el Proyecto Definitivo correspondiente?
+</div>
+""", unsafe_allow_html=True)
 
+# Claves de API
+API_KEY = st.secrets["CHATPDF_API_KEY"]
+SOURCE_ID = "cha_G85wPwqQ0gYG0SodoZPlh"
+
+# Entrada del usuario
 user_input = st.chat_input("Escribe tu duda sobre el contrato...")
 
 if user_input:
@@ -43,4 +58,5 @@ if user_input:
             st.markdown(result["content"])
         else:
             st.error("❌ Error en la API. Verifica tu clave o sourceId.")
+
 
